@@ -5,7 +5,15 @@ defmodule AuthStarterWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", AuthStarterWeb do
+  scope "/", AuthStarterWeb do
     pipe_through :api
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/posts", PostController, except: [:new, :edit]
   end
+
+  forward "/api", Absinthe.Plug,
+    schema: AuthStarterWeb.Schema
+
+  forward "/graphiql", Absinthe.Plug.GraphiQL,
+    schema: AuthStarterWeb.Schema
 end
