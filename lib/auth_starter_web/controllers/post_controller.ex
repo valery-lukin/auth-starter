@@ -11,14 +11,14 @@ defmodule AuthStarterWeb.PostController do
     render(conn, "index.json", posts: posts)
   end
 
-  def create(conn, %{"post" => post_params}) do
-    with {:ok, %Post{} = post} <- Posts.create_post(post_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", post_path(conn, :show, post))
-      |> render("show.json", post: post)
-    end
-  end
+  # def create(conn, %{"post" => post_params}) do
+  #   with {:ok, %Post{} = post} <- Posts.create_post(post_params) do
+  #     conn
+  #     |> put_status(:created)
+  #     |> put_resp_header("location", post_path(conn, :show, post))
+  #     |> render("show.json", post: post)
+  #   end
+  # end
 
   def show(conn, %{"id" => id}) do
     post = Posts.get_post!(id)

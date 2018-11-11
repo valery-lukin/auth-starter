@@ -1,7 +1,7 @@
 defmodule AuthStarter.UserResolver do
   alias AuthStarter.Accounts
 
-  def all(_args, _info) do
+  def all(_args, _info, _conn) do
     {:ok, Accounts.list_users()}
   end
 

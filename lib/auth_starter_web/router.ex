@@ -3,17 +3,17 @@ defmodule AuthStarterWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug AuthStarterWeb.Plugs.Context
   end
 
-  scope "/", AuthStarterWeb do
+  scope "/api" do
     pipe_through :api
-    resources "/users", UserController, except: [:new, :edit]
-    resources "/posts", PostController, except: [:new, :edit]
+
+    forward("/graphql", Absinthe.Plug, schema: AuthStarterWeb.Schema)
+
+    if Mix.env() == :dev do
+      forward("/graphiql", Absinthe.Plug.GraphiQL, schema: AuthStarterWeb.Schema)
+    end
   end
 
-  forward "/api", Absinthe.Plug,
-    schema: AuthStarterWeb.Schema
-
-  forward "/graphiql", Absinthe.Plug.GraphiQL,
-    schema: AuthStarterWeb.Schema
 end
