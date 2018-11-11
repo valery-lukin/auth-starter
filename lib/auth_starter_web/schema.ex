@@ -17,4 +17,27 @@ defmodule AuthStarterWeb.Schema  do
     end
   end
 
+  mutation do
+    field :create_post, type: :post do
+      arg :title, non_null(:string)
+      arg :body, non_null(:string)
+      arg :user_id, non_null(:integer)
+
+      resolve &AuthStarter.PostResolver.create/2
+    end
+
+    field :update_post, type: :post do
+      arg :id, non_null(:integer)
+      arg :post, :update_post_params
+
+      resolve &AuthStarter.PostResolver.update/2
+    end
+
+    field :delete_post, type: :post do
+      arg :id, non_null(:integer)
+
+      resolve &AuthStarter.PostResolver.delete/2
+    end
+  end
+
 end
