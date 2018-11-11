@@ -18,7 +18,7 @@ defmodule AuthStarterWeb.Schema  do
   end
 
   mutation do
-
+    @desc "Updates user"
     field :update_user, type: :user do
       arg :id, non_null(:integer)
       arg :user, :update_user_params
@@ -26,6 +26,15 @@ defmodule AuthStarterWeb.Schema  do
       resolve &AuthStarter.UserResolver.update/2
     end
 
+    @desc "Login user and return token"
+    field :login_user, type: :session_type do
+      arg :input, non_null(:session_input_type)
+
+      resolve &AuthStarter.SessionResolver.login_user/3
+    end
+
+    # Posts section
+    @desc "Creates new Post"
     field :create_post, type: :post do
       arg :title, non_null(:string)
       arg :body, non_null(:string)
@@ -34,6 +43,7 @@ defmodule AuthStarterWeb.Schema  do
       resolve &AuthStarter.PostResolver.create/2
     end
 
+    @desc "Updates existing Post"
     field :update_post, type: :post do
       arg :id, non_null(:integer)
       arg :post, :update_post_params
@@ -41,6 +51,7 @@ defmodule AuthStarterWeb.Schema  do
       resolve &AuthStarter.PostResolver.update/2
     end
 
+    @desc "Deletes Post"
     field :delete_post, type: :post do
       arg :id, non_null(:integer)
 
