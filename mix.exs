@@ -44,7 +44,10 @@ defmodule AuthStarter.Mixfile do
       {:absinthe, "~> 1.4.6"},
       {:absinthe_plug, "~> 1.4.2"},
       {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
-      {:faker, "~> 0.9"}
+      {:faker, "~> 0.9"},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"},
+      {:guardian, "~> 1.0"}
     ]
   end
 

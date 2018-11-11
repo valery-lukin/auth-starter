@@ -11,4 +11,9 @@ defmodule AuthStarter.UserResolver do
       user -> {:ok, user}
     end
   end
+
+  def update(%{id: id, user: user_params}, _info) do
+    Accounts.get_user!(id)
+    |> Accounts.update_user(user_params)
+  end
 end

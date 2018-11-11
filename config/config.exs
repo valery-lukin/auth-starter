@@ -22,6 +22,11 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
+# Configures Guardian
+config :auth_starter, AuthStarter.Guardian,
+  issuer: "auth_starter",
+  secret_key: "E/56psFssq5ePbqaJe0yfo5PTbKznsmpLVMrK6tNMNYc8BMNkTI6DGTbW8Bu0G/o"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
